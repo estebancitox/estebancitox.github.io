@@ -28,6 +28,7 @@
 /* Metric-matched fallbacks: text lays out on webfont metrics before swap */
 @font-face {
   font-family: "Archivo-fb";
+  font-weight: 400 500;
   src: local("Arial");
   size-adjust: 98.62%;
   ascent-override: 89.03%;
@@ -90,7 +91,6 @@
   --muted: #5a6470;
   --line: #d9dee1;
   --accent: #b03d00;
-  --hover: rgba(23, 26, 30, 0.045);
 
   --sans: "Archivo", "Archivo-fb", system-ui, Arial, sans-serif;
   --disp: "Archivo Expanded", "ArchivoExp-fb", Arial, sans-serif;
@@ -106,7 +106,6 @@
   --muted: #8b939c;
   --line: #2a2f35;
   --accent: #ff8a50;
-  --hover: rgba(230, 233, 234, 0.055);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -117,7 +116,6 @@
     --muted: #8b939c;
     --line: #2a2f35;
     --accent: #ff8a50;
-    --hover: rgba(230, 233, 234, 0.055);
   }
 }
 
@@ -200,6 +198,14 @@
   .wordmark {
     white-space: nowrap;
     letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .wordmark:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    text-decoration-color: var(--muted);
   }
   .site-head nav {
     margin-left: auto;
@@ -242,7 +248,7 @@
   .name {
     font-family: var(--disp);
     font-weight: 700;
-    font-size: clamp(2.75rem, 12.5vw, 7.25rem);
+    font-size: clamp(2.75rem, 12.5vw, 9.5rem);
     line-height: 0.95;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -353,12 +359,9 @@
 
   .entry {
     padding-block: 1.6rem;
-    margin-inline: -0.75rem;
-    padding-inline: 0.75rem;
-    transition: background-color 0.15s;
   }
-  .entry:hover {
-    background: var(--hover);
+  .entry:not(:has(.entry-detail)) {
+    padding-block: 1.15rem;
   }
   .entry + .entry {
     border-top: 1px solid var(--line);
@@ -529,15 +532,38 @@
   @media print {
     .site-head nav,
     #theme-toggle,
-    .skip {
+    .skip,
+    #visit {
       display: none;
     }
     body {
       background: #fff;
       color: #000;
+      font-size: 11pt;
     }
     a {
       color: #000;
+    }
+    .hero {
+      padding-block: 1.5rem;
+    }
+    .name {
+      font-size: 2.5rem;
+    }
+    .standfirst {
+      margin-top: 1rem;
+    }
+    .section {
+      display: block;
+      padding-block: 1.25rem;
+    }
+    .section h2 {
+      position: static;
+      margin-bottom: 1rem;
+    }
+    .entry,
+    .cap {
+      break-inside: avoid;
     }
   }
 }

@@ -2,7 +2,6 @@
   "use strict";
 
   const html = document.documentElement;
-  const GROUND = { light: "#F3F5F6", dark: "#14171B" };
 
   const stored = () => {
     try {
@@ -28,7 +27,7 @@
         .querySelectorAll('meta[name="theme-color"][media]')
         .forEach((m) => m.remove());
     }
-    meta.content = GROUND[current()];
+    meta.content = getComputedStyle(document.body).backgroundColor;
   };
 
   const syncLabel = () => {
@@ -62,13 +61,21 @@
 
   addEventListener("load", () => {
     requestAnimationFrame(() => {
-      const nav = performance.getEntriesByType("navigation")[0];
-      const out = document.getElementById("visit-ms");
       const line = document.getElementById("visit");
-      if (nav && nav.domContentLoadedEventEnd > 0 && out && line) {
-        out.textContent = Math.round(nav.domContentLoadedEventEnd);
-        line.hidden = false;
-      }
+      const outN = document.getElementById("visit-n");
+      const outKb = document.getElementById("visit-kb");
+      const nav = performance.getEntriesByType("navigation")[0];
+      if (!line || !outN || !outKb || !nav) return;
+      const res = performance.getEntriesByType("resource");
+      const bytes =
+        (nav.transferSize || 0) +
+        res.reduce((sum, r) => sum + (r.transferSize || 0), 0);
+      outN.textContent = 1 + res.length;
+      outKb.textContent =
+        bytes > 0
+          ? Math.max(1, Math.round(bytes / 1024)) + " KB"
+          : "0 KB (your cache)";
+      line.hidden = false;
     });
   });
 

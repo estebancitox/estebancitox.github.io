@@ -36,7 +36,6 @@
 
   <link rel="preload" href="/fonts/archivo-expanded-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/archivo-500.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/plexmono-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/main.css">
   <script src="/js/main.js" defer></script>
@@ -62,7 +61,7 @@
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="site-head">
-    <p class="wordmark">sergio esteban torres</p>
+    <a class="wordmark" href="/">sergio esteban torres</a>
     <nav aria-label="Sections">
       <a href="#experience">Experience</a>
       <a href="#capabilities">Capabilities</a>
@@ -81,7 +80,7 @@
       <h1 class="name"><span>Sergio</span> <span>Esteban</span> <span>Torres</span></h1>
       <p class="standfirst">Senior frontend engineer — 8+&nbsp;years building fast, reliable web products. These days: React and TypeScript.</p>
       <p class="dataline">Colombia&nbsp;· UTC−05&nbsp;· Remote&nbsp;· ES&thinsp;/&thinsp;EN</p>
-      <ul class="links">
+      <ul class="links" role="list">
         <li><a href="mailto:sergio.smiling@gmail.com">email</a></li>
         <li><a href="https://www.linkedin.com/in/sergioestebantorres">linkedin&nbsp;<span aria-hidden="true">↗</span></a></li>
         <li><a href="https://github.com/estebancitox/estebancitox.github.io">source&nbsp;<span aria-hidden="true">↗</span></a></li>
@@ -90,7 +89,7 @@
 
     <section id="experience" class="section">
       <h2>Experience</h2>
-      <ol class="log" reversed>
+      <ol class="log" role="list" reversed>
         <li class="entry is-current">
           <p class="entry-when"><time datetime="2023">2023</time>–<span class="now">now</span></p>
           <div class="entry-body">
@@ -143,9 +142,8 @@
       <div class="contact-body">
         <p class="contact-lead">Building something that needs a senior frontend hand?</p>
         <p class="contact-mail"><a href="mailto:sergio.smiling@gmail.com">sergio.smiling@gmail.com</a></p>
-        <ul class="links">
+        <ul class="links" role="list">
           <li><a href="https://www.linkedin.com/in/sergioestebantorres">linkedin&nbsp;<span aria-hidden="true">↗</span></a></li>
-          <li><a href="https://github.com/estebancitox/estebancitox.github.io">source&nbsp;<span aria-hidden="true">↗</span></a></li>
         </ul>
         <p class="dataline">Spanish&nbsp;(native)&nbsp;· English&nbsp;(professional)</p>
       </div>
@@ -154,9 +152,9 @@
 
   <footer class="colophon">
     <p class="label">Colophon</p>
-    <p>Hand-built: semantic HTML, modern CSS, and under 1&nbsp;KB (gzipped) of vanilla JavaScript. No framework, no build step, no tracking.</p>
+    <p>Hand-built: semantic HTML, modern CSS, and ≈1&nbsp;KB (gzipped) of vanilla JavaScript. No framework, no build step, no tracking.</p>
     <p id="scores">Lighthouse (mobile): 100&nbsp;·&nbsp;100&nbsp;·&nbsp;100&nbsp;·&nbsp;100 — performance, accessibility, best&nbsp;practices, SEO. Measured July&nbsp;2026 · ≈48&nbsp;KB over the wire, webfonts included.</p>
-    <p id="visit" hidden>This visit: DOM ready in <span id="visit-ms">—</span>&nbsp;ms.</p>
+    <p id="visit" hidden>This visit: <span id="visit-n">—</span>&nbsp;requests · <span id="visit-kb">—</span> over the wire.</p>
     <p>© 2026 Sergio Esteban Torres · Set in Archivo &amp; IBM&nbsp;Plex&nbsp;Mono · <a href="https://github.com/estebancitox/estebancitox.github.io">source&nbsp;<span aria-hidden="true">↗</span></a></p>
   </footer>
 </body>
