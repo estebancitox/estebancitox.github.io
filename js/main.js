@@ -59,24 +59,36 @@
     });
   }
 
+  const paintVisit = () => {
+    const line = document.getElementById("visit");
+    const outN = document.getElementById("visit-n");
+    const outKb = document.getElementById("visit-kb");
+    const nav = performance.getEntriesByType("navigation")[0];
+    if (!line || !outN || !outKb || !nav) return;
+    const res = performance.getEntriesByType("resource");
+    const bytes =
+      (nav.transferSize || 0) +
+      res.reduce((sum, r) => sum + (r.transferSize || 0), 0);
+    outN.textContent = 1 + res.length;
+    outKb.textContent =
+      bytes > 0
+        ? Math.max(1, Math.round(bytes / 1024)) + " KB"
+        : "0 KB (your cache)";
+    line.hidden = false;
+  };
+
   addEventListener("load", () => {
-    requestAnimationFrame(() => {
-      const line = document.getElementById("visit");
-      const outN = document.getElementById("visit-n");
-      const outKb = document.getElementById("visit-kb");
-      const nav = performance.getEntriesByType("navigation")[0];
-      if (!line || !outN || !outKb || !nav) return;
-      const res = performance.getEntriesByType("resource");
-      const bytes =
-        (nav.transferSize || 0) +
-        res.reduce((sum, r) => sum + (r.transferSize || 0), 0);
-      outN.textContent = 1 + res.length;
-      outKb.textContent =
-        bytes > 0
-          ? Math.max(1, Math.round(bytes / 1024)) + " KB"
-          : "0 KB (your cache)";
-      line.hidden = false;
-    });
+    requestAnimationFrame(paintVisit);
+    if ("PerformanceObserver" in window) {
+      try {
+        new PerformanceObserver(paintVisit).observe({
+          type: "resource",
+          buffered: true,
+        });
+      } catch (e) {
+        /* observer unsupported: the load-time snapshot stands */
+      }
+    }
   });
 
   console.log(
