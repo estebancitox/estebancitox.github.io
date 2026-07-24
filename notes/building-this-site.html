@@ -83,7 +83,7 @@
       <div class="prose">
         <h2>The constraint</h2>
         <p>This site had one design constraint that outranked every other: it had to be its own proof. A portfolio that claims performance and craft while shipping a megabyte of framework runtime is arguing against itself. So the rule — no framework, no build step, nothing between the repository and what your browser receives. What is committed is what ships; the deploy pipeline is <code>git push</code>.</p>
-        <p>That rule is also the point being made. Anyone can reach for the tooling. The harder judgment is recognizing when 8&nbsp;KB of HTML, 12&nbsp;KB of CSS and under 3&nbsp;KB of JavaScript are the whole job. The repository has no package.json, no lockfile, no config directory. There is nothing to install, and therefore nothing to rot.</p>
+        <p>Anyone can reach for the tooling. Here, 8&nbsp;KB of HTML, 12&nbsp;KB of CSS and under 3&nbsp;KB of JavaScript are the whole job. The repository has no package.json, no lockfile, no config directory. There is nothing to install, and therefore nothing to rot.</p>
 
         <h2>Fonts: subset, self-host, metric-match</h2>
         <p>The heaviest thing on this page is type, and that was a decision. Webfonts are also the classic source of layout shift: the fallback paints first, the webfont lands, everything moves.</p>
@@ -97,7 +97,7 @@
   descent-override: 21.29%;
   line-gap-override: 0%;
 }</code></pre>
-        <p>Those percentages are not taste. They are computed from the two fonts’ metric tables. The result: the swap happens, and nothing moves. Cumulative Layout Shift is 0 in every Lighthouse run, on both form factors.</p>
+        <p>The percentages are derived from the two fonts’ metric tables. The result: the swap happens, and nothing moves. Cumulative Layout Shift is 0 in every recorded Lighthouse run, on both form factors.</p>
 
         <h2>Themes: 130 bytes before first paint</h2>
         <p>Dark mode is a checkbox; dark mode without a flash of the wrong theme is a discipline. Any theme applied by JavaScript after first paint flashes, and any toggle that lives only in JavaScript breaks without it.</p>
@@ -109,7 +109,7 @@ catch(e){}})()&lt;/script&gt;</code></pre>
 
         <h2>The colophon that measures itself</h2>
         <p>Performance claims on portfolio sites are usually adjectives. The footer of this site states numbers instead — Lighthouse 100&nbsp;·&nbsp;100&nbsp;·&nbsp;100&nbsp;·&nbsp;100 on mobile, ≈49&nbsp;KB over the wire — and then goes one step further: it measures the visit you are currently making. A short block of JavaScript sums <code>transferSize</code> across every entry the Resource Timing API has seen and prints the request count and the bytes; a buffered <code>PerformanceObserver</code> re-runs it when a straggler (the favicon) lands after <code>load</code>. On a return visit it will happily report <code>0 KB (your cache)</code>.</p>
-        <p>The git history keeps that line honest twice over. The first version printed DOM-ready time; the review pass replaced it, on the grounds that a duration measured on your device mostly describes your device, while bytes are the same on every phone — the commit reads “visit line reports requests + wire bytes instead of device-dependent timing.” And when a later edit pushed the script 34 bytes past the footer’s “under 1&nbsp;KB” claim, it was the claim that changed, not the code that got golfed to defend it. The commit message states the policy outright: <em>the number stays honest.</em></p>
+        <p>The git history keeps that line honest twice over. The first version printed DOM-ready time; the review pass replaced it, on the grounds that a duration measured on your device mostly describes your device, while bytes are the same on every phone — the commit reads “visit line reports requests + wire bytes instead of device-dependent timing.” And when a later edit pushed the script past the footer’s “under 1&nbsp;KB” claim, it was the claim that changed, not the code that got golfed to defend it. The commit message states the policy outright: <em>the number stays honest.</em></p>
 
         <h2>One stylesheet, six layers</h2>
         <p>All styling is one file, and single stylesheets die a known death: specificity creep, then <code>!important</code>, then archaeology. The defense here is native cascade layers. The file opens by declaring its constitution — <code>@layer reset, base, layout, components, motion, print;</code> — and later layers win by design rather than by selector arms race. The only <code>!important</code> in 569 lines appears twice in the reduced-motion kill-switch, where it is the point: <code>prefers-reduced-motion: reduce</code> flattens every animation and transition unconditionally. Motion is double-gated — entrance animation exists only inside a <code>no-preference</code> query, and the reduce query zeroes everything anyway. Print is not an afterthought but the sixth layer: the display type drops to 2.5rem, sections unstack, rows refuse to break across pages. The whole file is 569 lines and 2,947 bytes gzipped.</p>
@@ -120,11 +120,11 @@ catch(e){}})()&lt;/script&gt;</code></pre>
           <li><strong>A framework and a bundler.</strong> Not purism — arithmetic. The page is a header, four sections and a footer; the runtime would outweigh the content several times over. No commit in this repository has ever contained a package.json.</li>
           <li><strong>Motion beyond two keyframes.</strong> The stylesheet’s entire animation inventory is <code>rise</code> and <code>fade</code>, on load, once. Nothing scroll-triggered, nothing cursor-following, no particles.</li>
           <li><strong>A hover effect on the experience rows.</strong> It shipped, then died in review with the note “inert row hover removed” — rows that highlight invite clicks they cannot honor.</li>
-          <li><strong>Invented dates.</strong> The experience log rendered start-years only, until real end dates were confirmed; the ranges appear in the final commit — titled “real end dates” — and not before. On this site an unknown stays visibly unknown.</li>
+          <li><strong>Invented dates.</strong> The experience log rendered start-years only, until real end dates were confirmed; the ranges appear in the commit titled “real end dates” — and not before. On this site an unknown stays visibly unknown.</li>
         </ul>
 
         <h2>How it was built</h2>
-        <p>Every commit in this repository carries the trailer <code>Co-Authored-By: Claude Fable 5</code>. The site was built AI-assisted, in Claude Code, and I see no reason to hide what the git log states seven times. The discipline is in the workflow around it: plan first, human veto on the plan, then verification of everything that ships. Four of the seven commit messages are verification language — “AA-verified palette,” “Verified at 360/768/1280/1920,” “measured colophon,” “verified no overflow.” The numbers in the footer come from Lighthouse CLI runs, not estimates, and a fresh-context review pass — briefed to be hostile — produced the sixth commit. It is the same bar the main page’s Capabilities section promises for production work: generated code is reviewed, tested, and owned like anything else that ships.</p>
+        <p>Every commit in this repository carries the trailer <code>Co-Authored-By: Claude Fable 5</code>. The site was built AI-assisted, in Claude Code — the git log was never going to hide that, so neither will I. The discipline is in the workflow around it: plan first, human veto on the plan, then verification of everything that ships. The log’s own language is verification — “AA-verified palette,” “Verified at 360/768/1280/1920,” “measured colophon,” “verified no overflow.” The numbers in the footer come from Lighthouse CLI runs, not estimates, and a fresh-context review pass — briefed to be hostile — produced the sixth commit. It is the same bar the main page’s Capabilities section promises for production work.</p>
 
         <h2>The numbers</h2>
         <p>Measured July 2026, Lighthouse 12, uncached first visit of the main page:</p>
