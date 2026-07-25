@@ -66,9 +66,15 @@
     const nav = performance.getEntriesByType("navigation")[0];
     if (!line || !outN || !outKb || !nav) return;
     const res = performance.getEntriesByType("resource");
-    const bytes =
-      (nav.transferSize || 0) +
-      res.reduce((sum, r) => sum + (r.transferSize || 0), 0);
+    /* payload convention: compressed body bytes of entries that actually
+       crossed the network; headers excluded (HPACK makes them unstable) */
+    const bytes = [nav]
+      .concat(res)
+      .reduce(
+        (sum, r) =>
+          sum + ((r.transferSize || 0) > 0 ? r.encodedBodySize || 0 : 0),
+        0
+      );
     outN.textContent = 1 + res.length;
     outKb.textContent =
       bytes > 0

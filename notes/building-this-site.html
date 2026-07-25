@@ -83,7 +83,7 @@
       <div class="prose">
         <h2>The constraint</h2>
         <p>This site had one design constraint that outranked every other: it had to be its own proof. A portfolio that claims performance and craft while shipping a megabyte of framework runtime is arguing against itself. So the rule — no framework, no build step, nothing between the repository and what your browser receives. What is committed is what ships; the deploy pipeline is <code>git push</code>.</p>
-        <p>Anyone can reach for the tooling. Here, 8&nbsp;KB of HTML, 12&nbsp;KB of CSS and under 3&nbsp;KB of JavaScript are the whole job. The repository has no package.json, no lockfile, no config directory. There is nothing to install, and therefore nothing to rot.</p>
+        <p>Anyone can reach for the tooling. Here, 8&nbsp;KB of HTML, 12&nbsp;KB of CSS and 3&nbsp;KB of JavaScript are the whole job. The repository has no package.json, no lockfile, no config directory. There is nothing to install, and therefore nothing to rot.</p>
 
         <h2>Fonts: subset, self-host, metric-match</h2>
         <p>The heaviest thing on this page is type, and that was a decision. Webfonts are also the classic source of layout shift: the fallback paints first, the webfont lands, everything moves.</p>
@@ -108,7 +108,7 @@ catch(e){}})()&lt;/script&gt;</code></pre>
         <p>The stylesheet then carries two routes to the same tokens: a <code>prefers-color-scheme</code> media query for people who never touch the toggle — which is also why the site themes correctly with JavaScript disabled — and a <code>data-theme</code> override for people who do. Yes, that means the dark token block appears twice in the CSS. <code>light-dark()</code> would collapse the duplication, but it fails unrecoverably on pre-2024 browsers, and a locked-down corporate laptop is exactly where this page cannot afford to break. The duplication was the cheaper bill. The toggle button ships <code>hidden</code> and is revealed by the same script that makes it work; the <code>theme-color</code> meta is read back from <code>getComputedStyle</code> rather than maintained as a second hardcoded palette.</p>
 
         <h2>The colophon that measures itself</h2>
-        <p>Performance claims on portfolio sites are usually adjectives. The footer of this site states numbers instead — Lighthouse 100&nbsp;·&nbsp;100&nbsp;·&nbsp;100&nbsp;·&nbsp;100 on mobile, ≈49&nbsp;KB over the wire — and then goes one step further: it measures the visit you are currently making. A short block of JavaScript sums <code>transferSize</code> across every entry the Resource Timing API has seen and prints the request count and the bytes; a buffered <code>PerformanceObserver</code> re-runs it when a straggler (the favicon) lands after <code>load</code>. On a return visit it will happily report <code>0 KB (your cache)</code>.</p>
+        <p>Performance claims on portfolio sites are usually adjectives. The footer of this site states numbers instead — Lighthouse 100&nbsp;·&nbsp;100&nbsp;·&nbsp;100&nbsp;·&nbsp;100 on mobile, ≈49&nbsp;KB compressed — and then goes one step further: it measures the visit you are currently making. A short block of JavaScript sums compressed payload bytes — <code>encodedBodySize</code>, for entries that actually crossed the network — and prints the request count alongside; a buffered <code>PerformanceObserver</code> re-runs it when a straggler (the favicon) lands after <code>load</code>. Headers are deliberately excluded: they ride HTTP/2 header compression and vary with the CDN’s mood, which makes them a poor unit for a promise. On a return visit it will happily report <code>0 KB (your cache)</code>.</p>
         <p>The git history keeps that line honest twice over. The first version printed DOM-ready time; the review pass replaced it, on the grounds that a duration measured on your device mostly describes your device, while bytes are the same on every phone — the commit reads “visit line reports requests + wire bytes instead of device-dependent timing.” And when a later edit pushed the script past the footer’s “under 1&nbsp;KB” claim, it was the claim that changed, not the code that got golfed to defend it. The commit message states the policy outright: <em>the number stays honest.</em></p>
 
         <h2>One stylesheet, six layers</h2>
@@ -130,11 +130,11 @@ catch(e){}})()&lt;/script&gt;</code></pre>
         <p>Measured July 2026, Lighthouse 12, uncached first visit of the main page:</p>
         <table class="numbers">
           <tbody>
-            <tr><th scope="row">Wire total</th><td>49,989 B (≈49 KB), webfonts included</td></tr>
+            <tr><th scope="row">Compressed payload</th><td>50,103 B (≈49 KB), webfonts included</td></tr>
             <tr><th scope="row">Requests, first visit</th><td>8</td></tr>
             <tr><th scope="row">Lighthouse, mobile</th><td>100 · 100 · 100 · 100</td></tr>
             <tr><th scope="row">Lighthouse, desktop</th><td>100 · 100 · 100 · 100</td></tr>
-            <tr><th scope="row">JavaScript</th><td>1,160 B gzipped</td></tr>
+            <tr><th scope="row">JavaScript</th><td>1,274 B gzipped</td></tr>
             <tr><th scope="row">Fonts</th><td>4 files · 42,788 B</td></tr>
             <tr><th scope="row">Stylesheet</th><td>2,947 B gzipped</td></tr>
           </tbody>
@@ -147,7 +147,7 @@ catch(e){}})()&lt;/script&gt;</code></pre>
   <footer class="colophon">
     <p class="label">Colophon</p>
     <p>Part of <a href="/">estebancitox.github.io</a> — same rules apply: no framework, no build step, no tracking.</p>
-    <p id="visit" hidden>This visit: <span id="visit-n">—</span>&nbsp;requests · <span id="visit-kb">—</span> over the wire.</p>
+    <p id="visit" hidden>This visit: <span id="visit-n">—</span>&nbsp;requests · <span id="visit-kb">—</span> compressed.</p>
     <p>© 2026 Sergio Esteban Torres · <a href="https://github.com/estebancitox/estebancitox.github.io">source&nbsp;<span aria-hidden="true">↗</span></a></p>
   </footer>
 </body>
