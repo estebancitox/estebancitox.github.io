@@ -112,7 +112,7 @@ catch(e){}})()&lt;/script&gt;</code></pre>
         <p>The git history keeps that line honest twice over. The first version printed DOM-ready time; the review pass replaced it, on the grounds that a duration measured on your device mostly describes your device, while bytes are the same on every phone — the commit reads “visit line reports requests + wire bytes instead of device-dependent timing.” And when a later edit pushed the script past the footer’s “under 1&nbsp;KB” claim, it was the claim that changed, not the code that got golfed to defend it. The commit message states the policy outright: <em>the number stays honest.</em></p>
 
         <h2>One stylesheet, six layers</h2>
-        <p>All styling is one file, and single stylesheets die a known death: specificity creep, then <code>!important</code>, then archaeology. The defense here is native cascade layers. The file opens by declaring its constitution — <code>@layer reset, base, layout, components, motion, print;</code> — and later layers win by design rather than by selector arms race. The only <code>!important</code> in 569 lines appears twice in the reduced-motion kill-switch, where it is the point: <code>prefers-reduced-motion: reduce</code> flattens every animation and transition unconditionally. Motion is double-gated — entrance animation exists only inside a <code>no-preference</code> query, and the reduce query zeroes everything anyway. Print is not an afterthought but the sixth layer: the display type drops to 2.5rem, sections unstack, rows refuse to break across pages. The whole file is 569 lines and 2,947 bytes gzipped.</p>
+        <p>All styling is one file, and single stylesheets die a known death: specificity creep, then <code>!important</code>, then archaeology. The defense here is native cascade layers. The file opens by declaring its constitution — <code>@layer reset, base, layout, components, motion, print;</code> — and later layers win by design rather than by selector arms race. The only <code>!important</code> in 593 lines appears twice in the reduced-motion kill-switch, where it is the point: <code>prefers-reduced-motion: reduce</code> flattens every animation and transition unconditionally. Motion is double-gated — entrance animation exists only inside a <code>no-preference</code> query, and the reduce query zeroes everything anyway. Print is not an afterthought but the sixth layer: the display type drops to 2.5rem, sections unstack, rows refuse to break across pages. The whole file is 593 lines and 3,023 bytes gzipped.</p>
 
         <h2>What was rejected</h2>
         <p>The no-list is most of the story.</p>
@@ -130,13 +130,13 @@ catch(e){}})()&lt;/script&gt;</code></pre>
         <p>Measured July 2026, Lighthouse 12, uncached first visit of the main page:</p>
         <table class="numbers">
           <tbody>
-            <tr><th scope="row">Compressed payload</th><td>50,103 B (≈49 KB), webfonts included</td></tr>
+            <tr><th scope="row">Compressed payload</th><td>50,405 B (≈49 KB), webfonts included</td></tr>
             <tr><th scope="row">Requests, first visit</th><td>8</td></tr>
             <tr><th scope="row">Lighthouse, mobile</th><td>100 · 100 · 100 · 100</td></tr>
             <tr><th scope="row">Lighthouse, desktop</th><td>100 · 100 · 100 · 100</td></tr>
             <tr><th scope="row">JavaScript</th><td>1,274 B gzipped</td></tr>
             <tr><th scope="row">Fonts</th><td>4 files · 42,788 B</td></tr>
-            <tr><th scope="row">Stylesheet</th><td>2,947 B gzipped</td></tr>
+            <tr><th scope="row">Stylesheet</th><td>3,023 B gzipped</td></tr>
           </tbody>
         </table>
         <p>This page is held to the same bar — the footer below is measuring your visit right now.</p>
