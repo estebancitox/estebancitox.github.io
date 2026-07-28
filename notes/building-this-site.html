@@ -87,7 +87,7 @@
 
         <h2>Fonts: subset, self-host, metric-match</h2>
         <p>The heaviest thing on this page is type, and that was a decision. Webfonts are also the classic source of layout shift: the fallback paints first, the webfont lands, everything moves.</p>
-        <p>The choice here has three parts. First, four static woff2 files — Archivo 400 and 500, Archivo Expanded 700 for the display caps, IBM Plex Mono 400 — subset to the Latin range the site actually uses: 42,788 bytes for all four, with <code>font-synthesis:&nbsp;none</code> so no browser fakes a weight I didn’t ship. Second, <code>font-display:&nbsp;swap</code>, because text you can’t read while a font loads is a worse trade than a visible swap. Third — the part that makes swap free — each family has a metric-matched local fallback, Arial and Courier New overridden to lay text out on the webfont’s metrics before it arrives:</p>
+        <p>The choice here has three parts. First, four static woff2 files — Archivo 400 and 500, Archivo Expanded 700 for the display caps, IBM Plex Mono 400 — subset to the Latin range the site actually uses: 42,732 bytes for all four, with <code>font-synthesis:&nbsp;none</code> so no browser fakes a weight I didn’t ship. Second, <code>font-display:&nbsp;swap</code>, because text you can’t read while a font loads is a worse trade than a visible swap. Third — the part that makes swap free — each family has a metric-matched local fallback, Arial and Courier New overridden to lay text out on the webfont’s metrics before it arrives:</p>
         <pre><code>@font-face {
   font-family: "Archivo-fb";
   font-weight: 400 500;
@@ -97,7 +97,7 @@
   descent-override: 21.29%;
   line-gap-override: 0%;
 }</code></pre>
-        <p>The percentages are derived from the two fonts’ metric tables. The result: the swap happens, and nothing moves. Cumulative Layout Shift is 0 in every recorded Lighthouse run, on both form factors.</p>
+        <p>The percentages are derived from the two fonts’ metric tables. The result: the swap happens, and nothing moves. Cumulative Layout Shift measures 0 in the recorded Lighthouse runs, on both form factors.</p>
 
         <h2>Themes: 130 bytes before first paint</h2>
         <p>Dark mode is a checkbox; dark mode without a flash of the wrong theme is a discipline. Any theme applied by JavaScript after first paint flashes, and any toggle that lives only in JavaScript breaks without it.</p>
@@ -130,12 +130,12 @@ catch(e){}})()&lt;/script&gt;</code></pre>
         <p>Measured July 2026, Lighthouse 12, uncached first visit of the main page:</p>
         <table class="numbers">
           <tbody>
-            <tr><th scope="row">Compressed payload</th><td>50,491 B (≈49 KB), webfonts included</td></tr>
+            <tr><th scope="row">Compressed payload</th><td>50,435 B (≈49 KB), webfonts included</td></tr>
             <tr><th scope="row">Requests, first visit</th><td>8</td></tr>
             <tr><th scope="row">Lighthouse, mobile</th><td>100 · 100 · 100 · 100</td></tr>
             <tr><th scope="row">Lighthouse, desktop</th><td>100 · 100 · 100 · 100</td></tr>
             <tr><th scope="row">JavaScript</th><td>1,274 B gzipped</td></tr>
-            <tr><th scope="row">Fonts</th><td>4 files · 42,788 B</td></tr>
+            <tr><th scope="row">Fonts</th><td>4 files · 42,732 B</td></tr>
             <tr><th scope="row">Stylesheet</th><td>3,023 B gzipped</td></tr>
           </tbody>
         </table>
