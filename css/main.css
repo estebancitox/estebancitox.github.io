@@ -362,6 +362,9 @@
     border-bottom: 1.5px solid var(--accent);
     border-right: 1.5px solid var(--accent);
   }
+  .hero .dataline {
+    margin-top: 0;
+  }
 
   .entry {
     padding-block: 1.6rem;
@@ -439,6 +442,28 @@
     }
   }
 
+  .lab-lede {
+    margin-top: clamp(2rem, 5vh, 3rem);
+    font-size: 1.125rem;
+    color: var(--muted);
+    max-width: 66ch;
+    text-wrap: pretty;
+  }
+  .lab-status {
+    margin-top: 0.35rem;
+    margin-bottom: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .lab-stack {
+    margin-top: 0.55rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
   .cap {
     padding-block: 1.4rem;
   }
@@ -497,7 +522,7 @@
   .lost .dataline {
     margin-top: 0;
   }
-  .lost-title {
+  .page-title {
     font-family: var(--disp);
     font-weight: 700;
     font-size: clamp(2rem, 7vw, 3.5rem);

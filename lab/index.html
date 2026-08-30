@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  Hand-built. No framework, no build step - what you read here is what was written.
+  Two labs, opposite toolchain decisions. The colophon measures this visit while you read it.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(()=>{try{const t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}})()</script>
+
+  <title>Lab — Sergio Esteban Torres</title>
+  <meta name="description" content="Two projects, opposite toolchain decisions: a zero-build Canvas 2D instrument panel and a React 18 + TypeScript calculator with 119 unit tests and a CI-gated deploy.">
+  <link rel="canonical" href="https://estebancitox.github.io/lab/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3F5F6">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#14171B">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://estebancitox.github.io/lab/">
+  <meta property="og:title" content="Lab — Sergio Esteban Torres">
+  <meta property="og:description" content="Two projects, opposite toolchain decisions — and the reasoning behind each.">
+  <meta property="og:image" content="https://estebancitox.github.io/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sergio Esteban Torres — Senior Frontend Engineer, Colombia (remote)">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lab — Sergio Esteban Torres">
+  <meta name="twitter:description" content="Two projects, opposite toolchain decisions — and the reasoning behind each.">
+  <meta name="twitter:image" content="https://estebancitox.github.io/assets/og.png">
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <link rel="preload" href="/fonts/archivo-expanded-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/plexmono-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-head">
+    <a class="wordmark" href="/">sergio esteban torres</a>
+    <nav aria-label="Sections">
+      <a href="/#experience">Experience</a>
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button id="theme-toggle" type="button" hidden aria-label="Switch theme">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+        <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 1.5 a6.5 6.5 0 0 1 0 13 Z" fill="currentColor"/>
+      </svg>
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <p class="dataline">Lab&nbsp;· two projects</p>
+      <h1 class="page-title">Earning the toolchain</h1>
+      <p class="lab-lede">A toolchain is a bill you pay up front against risks you expect later. These two projects priced that bet in opposite directions — one bought the whole apparatus, the other bought none of it — and both were right. What is on display here is the reasoning, not the stack.</p>
+    </section>
+
+    <section class="section">
+      <h2>Projects</h2>
+      <ul class="log" role="list">
+        <li class="entry">
+          <div>
+            <h3 class="entry-key">instrument</h3>
+            <p class="lab-status"><span class="now">no build</span></p>
+          </div>
+          <div class="entry-body">
+            <p class="entry-detail">A working flight instrument panel — a simulated flight, drawn to Canvas&nbsp;2D frame by frame.</p>
+            <p class="lab-stack">vanilla&nbsp;JS · Canvas&nbsp;2D · ≈29&nbsp;KB</p>
+            <p class="entry-links"><a href="https://estebancitox.github.io/lab-instrument/">live&nbsp;<span aria-hidden="true">↗</span></a> <a href="https://github.com/estebancitox/lab-instrument">source&nbsp;<span aria-hidden="true">↗</span></a></p>
+          </div>
+        </li>
+        <li class="entry">
+          <div>
+            <h3 class="entry-key">cdt-ladder</h3>
+            <p class="lab-status"><span class="now">ci-gated</span></p>
+          </div>
+          <div class="entry-body">
+            <p class="entry-detail">A visual calculator for CDT laddering — Colombian term deposits, staggered so maturities land on a schedule you choose.</p>
+            <p class="lab-stack">React&nbsp;18 · TypeScript · 119 unit tests · CI-gated deploy</p>
+            <p class="entry-links"><a href="https://estebancitox.github.io/lab-cdt-ladder/">live&nbsp;<span aria-hidden="true">↗</span></a> <a href="https://github.com/estebancitox/lab-cdt-ladder">source&nbsp;<span aria-hidden="true">↗</span></a></p>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <p class="label">Colophon</p>
+    <p>Part of <a href="/">estebancitox.github.io</a> — same rules apply: no framework, no build step, no tracking.</p>
+    <p id="visit" hidden>This visit: <span id="visit-n">—</span>&nbsp;requests · <span id="visit-kb">—</span> compressed.</p>
+    <p>© 2026 Sergio Esteban Torres · <a href="https://github.com/estebancitox/estebancitox.github.io">source&nbsp;<span aria-hidden="true">↗</span></a></p>
+  </footer>
+</body>
+</html>
