@@ -1,7 +1,8 @@
 <!doctype html>
 <!--
   Hand-built. No framework, no build step - what you read here is what was written.
-  Two labs, opposite toolchain decisions. The colophon measures this visit while you read it.
+  Three labs: two opposite toolchain decisions, and a model bought and then verified.
+  The colophon measures this visit while you read it.
 -->
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
   <script>(()=>{try{const t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}})()</script>
 
   <title>Lab · Sergio Esteban Torres</title>
-  <meta name="description" content="Two projects, opposite toolchain decisions: a zero-build Canvas 2D instrument panel and a React 18 + TypeScript calculator with 119 unit tests and a CI-gated deploy.">
+  <meta name="description" content="Three projects: a zero-build Canvas 2D instrument panel, a React 18 + TypeScript calculator with 164 unit tests and a CI-gated deploy, and the verified LLM endpoint that explains the calculator's ladders.">
   <link rel="canonical" href="https://estebancitox.github.io/lab/">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3F5F6">
@@ -19,14 +20,14 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://estebancitox.github.io/lab/">
   <meta property="og:title" content="Lab · Sergio Esteban Torres">
-  <meta property="og:description" content="Two projects, opposite toolchain decisions, and the reasoning behind each.">
+  <meta property="og:description" content="Three projects, three toolchain decisions, and the reasoning behind each.">
   <meta property="og:image" content="https://estebancitox.github.io/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Sergio Esteban Torres, senior frontend engineer, Colombia (remote)">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Lab · Sergio Esteban Torres">
-  <meta name="twitter:description" content="Two projects, opposite toolchain decisions, and the reasoning behind each.">
+  <meta name="twitter:description" content="Three projects, three toolchain decisions, and the reasoning behind each.">
   <meta name="twitter:image" content="https://estebancitox.github.io/assets/og.png">
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -61,9 +62,9 @@
 
   <main id="main">
     <section class="hero">
-      <p class="dataline">Lab&nbsp;· two projects</p>
+      <p class="dataline">Lab&nbsp;· three projects</p>
       <h1 class="page-title">Earning the toolchain</h1>
-      <p class="lab-lede">A toolchain is a bill you pay up front against risks you expect later. These two projects priced that bet in opposite directions: one bought the whole apparatus, the other bought none of it. Both were right. What is on display here is the reasoning, not the stack.</p>
+      <p class="lab-lede">A toolchain is a bill you pay up front against risks you expect later. These projects priced that bet differently: one bought the whole apparatus, one bought none of it, and the third bought a language model and then the means to verify every reply it gives. All three were right. What is on display here is the reasoning, not the stack.</p>
     </section>
 
     <section class="section">
@@ -86,9 +87,20 @@
             <p class="lab-status"><span class="now">ci-gated</span></p>
           </div>
           <div class="entry-body">
-            <p class="entry-detail">A visual calculator for CDT laddering: Colombian term deposits, staggered so maturities land on a schedule you choose.</p>
-            <p class="lab-stack">React&nbsp;18 · TypeScript · 119 unit tests · CI-gated deploy</p>
+            <p class="entry-detail">A visual calculator for CDT laddering: Colombian term deposits, staggered so maturities land on a schedule you choose, with an explanation on demand from the endpoint below.</p>
+            <p class="lab-stack">React&nbsp;18 · TypeScript · 164 unit tests · CI-gated deploy</p>
             <p class="entry-links"><a href="https://estebancitox.github.io/lab-cdt-ladder/">live&nbsp;<span aria-hidden="true">↗</span></a> <a href="https://github.com/estebancitox/lab-cdt-ladder">source&nbsp;<span aria-hidden="true">↗</span></a></p>
+          </div>
+        </li>
+        <li class="entry">
+          <div>
+            <h3 class="entry-key">cdt-ladder-api</h3>
+            <p class="lab-status"><span class="now">public api</span></p>
+          </div>
+          <div class="entry-body">
+            <p class="entry-detail">The endpoint behind the calculator’s explanation: the model receives finished figures, never does arithmetic, and every reply is verified before it is returned.</p>
+            <p class="lab-stack">AWS&nbsp;Lambda · TypeScript · Claude · 576 tests · 10-case eval, 0 failures</p>
+            <p class="entry-links"><a href="https://estebancitox.github.io/lab-cdt-ladder/">live&nbsp;<span aria-hidden="true">↗</span></a> <a href="https://github.com/estebancitox/lab-cdt-ladder-api">source&nbsp;<span aria-hidden="true">↗</span></a> <a href="/notes/cdt-ladder-api.html">case&nbsp;study</a></p>
           </div>
         </li>
       </ul>
