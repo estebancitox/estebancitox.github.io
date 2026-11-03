@@ -54,8 +54,8 @@ Declared once in `:root` only — no dark-theme variants exist for these.
 Defines **no** custom properties. It is a consumer-only prose layer
 (`@layer prose`, `notes/notes.css:4`) that reads `--pad`
 (`notes/notes.css:6`), `--disp` (`notes/notes.css:16`), `--mono`
-(`notes/notes.css:36`, `:63`, `:86`), `--muted` (`notes/notes.css:28`, `:41`,
-`:57`, `:98`) and `--line` (`notes/notes.css:42`, `:65`, `:70`, `:94`). New
+(`notes/notes.css:36`, `:63`, `:86`, `:112`), `--muted` (`notes/notes.css:28`, `:41`,
+`:57`, `:98`, `:114`) and `--line` (`notes/notes.css:42`, `:65`, `:70`, `:94`, `:108`). New
 tokens belong in `css/main.css:87-120`, not here.
 
 ## Typography
