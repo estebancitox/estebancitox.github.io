@@ -3,18 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>(()=>{try{const t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}})()</script>
+  <script>document.documentElement.className="js"</script>
   <title>404 · Sergio Esteban Torres</title>
   <meta name="robots" content="noindex">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#E9EDEE">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="preload" href="/fonts/newsreader-opsz-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/archivo-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/archivo-name-650.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/inner.css">
+  <script src="/js/site.js" defer></script>
 </head>
 <body>
-  <main id="main" class="lost">
-    <p class="dataline">404 · no such route</p>
-    <h1 class="page-title">Nothing is filed under this address.</h1>
-    <p><a href="/">Return to estebancitox.github.io</a></p>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="head">
+    <div class="id">
+      <p class="name"><a href="/">Sergio Esteban Torres</a></p>
+      <p class="title">Senior Frontend Engineer</p>
+    </div>
+    <div class="tape" aria-hidden="true"></div>
+    <p class="avail">Available for senior remote roles</p>
+  </header>
+
+  <main id="main" class="page-head lost">
+    <p class="eyebrow">404 · no such route</p>
+    <h1>Nothing is filed under this address.</h1>
+    <p class="back"><a class="btn" href="/">Return to estebancitox.github.io</a></p>
   </main>
 </body>
 </html>

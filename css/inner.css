@@ -1,0 +1,306 @@
+/* Inner pages: the lab, the notes and the 404. Loaded after css/site.css,
+   which stays byte for byte what the home page ships, so the home's own
+   figures do not move. Rules join the layers site.css declares. */
+
+/* ── Faces ─────────────────────────────────────────────── */
+
+/* Code needs a monospace; the home page has none. This file is already in
+   fonts/ and its fallback metrics are the ones css/main.css uses. */
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/plexmono-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "PlexMono-fb";
+  src: local("Courier New"), local("CourierNewPSMT");
+  size-adjust: 99.98%;
+  ascent-override: 102.52%;
+  descent-override: 27.5%;
+  line-gap-override: 0%;
+}
+
+/* Body text before the webfont arrives. css/site.css tunes this face on the
+   home page's short lines (99.3%); with that value the ledes here ran one
+   line longer until the swap. Swept in Chrome over these pages at twelve
+   widths: 98.6% to 98.7% leaves every first screen as it is after the swap.
+   Declared after css/site.css, this replaces its 400-500 face on these pages. */
+@font-face {
+  font-family: "Archivo-fb";
+  font-weight: 400 500;
+  src: local("Arial");
+  size-adjust: 98.65%;
+  ascent-override: 89%;
+  descent-override: 21.29%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --mono: "IBM Plex Mono", "PlexMono-fb", ui-monospace, "SF Mono", Consolas, monospace;
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+
+@layer base {
+  /* The name in the header: an h1 on the home page, a link home here */
+  .name {
+    font: 650 1rem/1.375rem var(--wide);
+    letter-spacing: -0.005em;
+  }
+}
+
+/* ── Layout ────────────────────────────────────────────── */
+
+@layer layout {
+  .page-head {
+    padding: 3.25rem var(--pad) 0;
+  }
+  .page-head > * {
+    max-width: 40rem;
+  }
+  .eyebrow,
+  .note {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    color: var(--muted);
+  }
+  .page-head h1 {
+    margin-top: 0.875rem;
+    font: 400 clamp(2.375rem, 4.5vw, 3.625rem) / 1.04 var(--serif);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  /* What the page is, under its title */
+  .note {
+    margin-top: 1rem;
+  }
+  .lede {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
+    text-wrap: pretty;
+  }
+  .back {
+    display: flex;
+    margin-top: 1.75rem;
+  }
+
+  /* A chapter is the home page's section block with a wider label column,
+     so the prose starts where the home's row text starts */
+  .chapter {
+    margin-top: 4rem;
+  }
+  .page-head + .block {
+    margin-top: 4.5rem;
+  }
+  .chapter h2 {
+    flex-basis: min(21.875rem, 100%);
+  }
+  .prose {
+    max-width: 40rem;
+    padding-top: 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .projects .row {
+    row-gap: 0.5rem;
+    padding: 1.375rem 0 1.5rem;
+  }
+  .label + div {
+    flex: 999 1 26.25rem;
+    min-width: 0;
+    max-width: 40rem;
+  }
+  .lost {
+    padding-bottom: 7rem;
+  }
+
+  /* From the width where the header is sticky (css/site.css): the chapter's
+     title stays in view under it */
+  @media (min-width: 68.75em) {
+    .chapter h2 {
+      align-self: flex-start;
+      position: sticky;
+      top: 6rem;
+    }
+  }
+  @media (max-width: 68.74em) {
+    .name {
+      line-height: 1.25rem;
+    }
+    .page-head {
+      padding-top: 1.125rem;
+    }
+    .page-head h1 {
+      line-height: 1.053;
+    }
+    .lede {
+      margin-top: 1.125rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    .chapter {
+      margin-top: 3rem;
+    }
+    .page-head + .block {
+      margin-top: 3.5rem;
+    }
+  }
+}
+
+/* ── Components ────────────────────────────────────────── */
+
+@layer components {
+  /* The ruler on a long page: one unlabelled mark per section. Its name shows
+     on hover or focus, sliding with the mark so it never leaves the ruler. */
+  .marks a {
+    bottom: 0;
+    width: 0.875rem;
+    height: 1.25rem;
+    /* on its mark: css/site.css steps a link aside to keep the home page's
+       labels apart, and these links carry no label */
+    translate: -50%;
+  }
+  .marks a::after {
+    content: attr(aria-label);
+    position: absolute;
+    left: 50%;
+    /* clear of the focus outline, which reaches 5px above the mark */
+    bottom: 1.625rem;
+    translate: calc(-100% * var(--p, 0));
+    color: var(--ink);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .marks a:hover::after,
+  .marks a:focus-visible::after {
+    opacity: 1;
+  }
+  .marks li::after {
+    pointer-events: none;
+  }
+  /* js/site.js places the marks; without it there is no true position to show */
+  html:not(.js) .marks li {
+    display: none;
+  }
+
+  .prose > * + * {
+    margin-top: 0.95em;
+  }
+  .prose a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  .prose strong {
+    font-weight: 600;
+  }
+  .prose ul {
+    padding-left: 1.15rem;
+  }
+  .prose li + li {
+    margin-top: 0.4em;
+  }
+  .prose li::marker {
+    color: var(--muted);
+  }
+  .prose code {
+    font-family: var(--mono);
+    font-size: 0.875em;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 0.08em 0.3em;
+  }
+  .prose pre {
+    margin-block: 1.25rem 1.5rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow-x: auto;
+  }
+  .prose pre code {
+    border: 0;
+    padding: 0;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+  .prose figure {
+    margin-block: 1.25rem 1.5rem;
+  }
+  .prose video {
+    display: block;
+    width: 100%;
+    max-width: 30rem;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  .prose figcaption {
+    margin-top: 0.6rem;
+    text-align: left;
+  }
+
+  /* Label and value, on the grid of the home page's rows */
+  .numbers {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.96875rem;
+    line-height: 1.5rem;
+  }
+  .numbers th,
+  .numbers td {
+    padding: 0.7rem 1.75rem 0.75rem 0;
+    border-top: 1px solid var(--line);
+    text-align: left;
+    vertical-align: baseline;
+    font-weight: 400;
+  }
+  .numbers th {
+    width: 13.625rem;
+    color: var(--muted);
+  }
+  .numbers td {
+    padding-right: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A lab row's stack, then how its figure was measured */
+  .body .stack,
+  .body .how {
+    margin-top: 0.5rem;
+    font-size: 0.84375rem;
+    line-height: 1.25rem;
+  }
+  .colophon div p + p {
+    margin-top: 0.375rem;
+  }
+  .how a,
+  .colophon div a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 39.99em) {
+    .numbers th {
+      width: 45%;
+    }
+  }
+}
+
+/* ── Print ─────────────────────────────────────────────── */
+
+@layer print {
+  @media print {
+    .chapter h2 {
+      position: static;
+    }
+    #visit {
+      display: none;
+    }
+    .prose pre {
+      white-space: pre-wrap;
+    }
+  }
+}
