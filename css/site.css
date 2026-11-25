@@ -597,6 +597,7 @@
     align-items: center;
     height: 3rem;
     padding: 0 1.375rem;
+    border: 1.5px solid var(--ink);
     border-radius: 3px;
     background: var(--ink);
     font-weight: 550;
@@ -604,6 +605,10 @@
   .btn,
   .btn:hover {
     color: var(--ground);
+  }
+  .btn.outlined {
+    background: none;
+    color: var(--ink);
   }
   .link {
     margin-left: 0.875rem;
@@ -731,10 +736,10 @@
       font-size: 1rem;
       line-height: 1.25rem;
     }
-    .hero .btn {
+    .btn {
       padding-inline: 1.125rem;
     }
-    .hero .link {
+    .link {
       margin-left: 0.625rem;
     }
     .gauge svg {
