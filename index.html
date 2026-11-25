@@ -1,44 +1,43 @@
 <!doctype html>
 <!--
   Hand-built. No framework, no build step - what you read here is what was written.
-  The colophon at the bottom measures this visit while you read it.
+  The gauge measures this visit while you read it.
   sergio.smiling@gmail.com
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>(()=>{try{const t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}})()</script>
+  <script>document.documentElement.className="js"</script>
 
   <title>Sergio Esteban Torres · Senior Frontend Engineer</title>
-  <meta name="description" content="Senior frontend engineer. 8+ years building fast, reliable web products, most recently in React and TypeScript for a B2B aviation marketplace. Colombia · remote.">
+  <meta name="description" content="Senior frontend engineer in Colombia. 8+ years building fast web products. Lately: React, TypeScript and AI features. Available for senior remote roles.">
   <link rel="canonical" href="https://estebancitox.github.io/">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3F5F6">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#14171B">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#E9EDEE">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://estebancitox.github.io/">
   <meta property="og:title" content="Sergio Esteban Torres · Senior Frontend Engineer">
-  <meta property="og:description" content="8+ years building fast, reliable web products. React &amp; TypeScript · Colombia · remote.">
+  <meta property="og:description" content="I build fast web products and show the numbers behind them. React, TypeScript and AI features. Available for senior remote roles.">
   <meta property="og:image" content="https://estebancitox.github.io/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Sergio Esteban Torres, senior frontend engineer, Colombia (remote)">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sergio Esteban Torres · Senior Frontend Engineer">
-  <meta name="twitter:description" content="8+ years building fast, reliable web products. React &amp; TypeScript · Colombia · remote.">
+  <meta name="twitter:description" content="I build fast web products and show the numbers behind them. React, TypeScript and AI features. Available for senior remote roles.">
   <meta name="twitter:image" content="https://estebancitox.github.io/assets/og.png">
 
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-  <link rel="preload" href="/fonts/archivo-expanded-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/plexmono-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/main.css">
-  <script src="/js/main.js" defer></script>
+  <link rel="preload" href="/fonts/newsreader-opsz-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/archivo-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/archivo-name-650.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
+  <script src="/js/site.js" defer></script>
 
   <script type="application/ld+json">
   {
@@ -60,138 +59,215 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-head">
-    <a class="wordmark" href="/">sergio esteban torres</a>
-    <nav aria-label="Sections">
-      <a href="#experience">Experience</a>
-      <a href="#work">Work</a>
-      <a href="/lab/">Lab</a>
-      <a href="#capabilities">Capabilities</a>
-      <a href="#contact">Contact</a>
+  <header class="head">
+    <div class="id">
+      <h1 data-fact="who">Sergio Esteban Torres</h1>
+      <p class="title" data-fact="seniority-title">Senior Frontend Engineer</p>
+    </div>
+    <nav class="tape" aria-label="Sections">
+      <ol role="list">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#capabilities">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
     </nav>
-    <button id="theme-toggle" type="button" hidden aria-label="Switch theme">
-      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
-        <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M8 1.5 a6.5 6.5 0 0 1 0 13 Z" fill="currentColor"/>
-      </svg>
-    </button>
+    <p class="avail" data-fact="availability">Available for senior remote roles</p>
+    <a class="menu" href="#menu">Menu</a>
   </header>
 
   <main id="main">
     <section class="hero">
-      <h1 class="name"><span>Sergio</span> <span>Esteban</span> <span>Torres</span></h1>
-      <p class="standfirst">Senior frontend engineer. 8+&nbsp;years building fast, reliable web products. These days: React and TypeScript.</p>
-      <p class="dataline">Colombia&nbsp;· UTC−05&nbsp;· Remote&nbsp;· ES&thinsp;/&thinsp;EN</p>
-      <ul class="links" role="list">
-        <li><a href="mailto:sergio.smiling@gmail.com">email</a></li>
-        <li><a href="https://www.linkedin.com/in/sergioestebantorres">linkedin&nbsp;<span aria-hidden="true">↗</span></a></li>
-        <li><a href="https://github.com/estebancitox/estebancitox.github.io">source&nbsp;<span aria-hidden="true">↗</span></a></li>
-      </ul>
+      <div class="pitch">
+        <p class="lead" data-fact="what">I build fast web products and show the numbers behind them.</p>
+        <p class="years" data-fact="seniority-years">8+&nbsp;years building web products. React, TypeScript and AI&nbsp;features.</p>
+        <p class="where" data-fact="where">Colombia, UTC−05. Remote. English and Spanish.</p>
+        <div class="cta" data-fact="contact">
+          <a class="btn" href="mailto:sergio.smiling@gmail.com">Email me</a>
+          <a class="link" href="https://www.linkedin.com/in/sergioestebantorres">LinkedIn</a>
+        </div>
+      </div>
+      <figure class="gauge">
+        <svg viewBox="0 0 480 480" role="img" aria-label="Gauge: this page weighs 62 kilobytes compressed, under a limit of 100">
+          <defs>
+            <radialGradient id="dial" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="#1B262D"/><stop offset="1" stop-color="#0C1317"/></radialGradient>
+            <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#313E47"/><stop offset="1" stop-color="#141C22"/></linearGradient>
+          </defs>
+          <circle cx="240" cy="240" r="238" fill="url(#bezel)"/>
+          <circle cx="240" cy="240" r="226" fill="url(#dial)"/>
+          <g fill="none">
+            <circle cx="240" cy="240" r="226" stroke="#000" stroke-opacity=".55" stroke-width="2"/>
+            <circle cx="240" cy="240" r="237" stroke="#fff" stroke-opacity=".1"/>
+            <circle cx="240" cy="240" r="171" stroke="#fff" stroke-opacity=".07"/>
+            <path d="M93.63 386.37A207 207 0 1 1 447 240" stroke="#2DBE78" stroke-width="4.5"/>
+            <path d="M430 240L456 240" stroke="#E5484D" stroke-width="4"/>
+            <g stroke="#F3F6F7">
+              <path stroke-width="3.2" d="M99.99 380.01L116.96 363.04M42 240L66 240M99.99 99.99L116.96 116.96M240 42L240 66M380.01 99.99L363.04 116.96M380.01 380.01L363.04 363.04"/>
+              <path stroke-width="2" d="M57.07 315.77L71.85 309.65M57.07 164.23L71.85 170.35M164.23 57.07L170.35 71.85M315.77 57.07L309.65 71.85M422.93 164.23L408.15 170.35M422.93 315.77L408.15 309.65"/>
+              <path stroke-width="1.2" d="M89.44 368.59L96.28 362.75M79.81 356.38L87.1 351.09M71.18 343.45L78.85 338.75M63.58 329.89L71.6 325.8M51.69 301.19L60.25 298.4M47.47 286.22L56.22 284.12M44.44 270.97L53.33 269.57M42.61 255.53L51.58 254.83M42.61 224.47L51.58 225.17M44.44 209.03L53.33 210.43M47.47 193.78L56.22 195.88M51.69 178.81L60.25 181.6M63.58 150.11L71.6 154.2M71.18 136.55L78.85 141.25M79.81 123.62L87.1 128.91M89.44 111.41L96.28 117.25M111.41 89.44L117.25 96.28M123.62 79.81L128.91 87.1M136.55 71.18L141.25 78.85M150.11 63.58L154.2 71.6M178.81 51.69L181.6 60.25M193.78 47.47L195.88 56.22M209.03 44.44L210.43 53.33M224.47 42.61L225.17 51.58M255.53 42.61L254.83 51.58M270.97 44.44L269.57 53.33M286.22 47.47L284.12 56.22M301.19 51.69L298.4 60.25M329.89 63.58L325.8 71.6M343.45 71.18L338.75 78.85M356.38 79.81L351.09 87.1M368.59 89.44L362.75 96.28M390.56 111.41L383.72 117.25M400.19 123.62L392.9 128.91M408.82 136.55L401.15 141.25M416.42 150.11L408.4 154.2M428.31 178.81L419.75 181.6M432.53 193.78L423.78 195.88M435.56 209.03L426.67 210.43M437.39 224.47L428.42 225.17M437.39 255.53L428.42 254.83M435.56 270.97L426.67 269.57M432.53 286.22L423.78 284.12M428.31 301.19L419.75 298.4M416.42 329.89L408.4 325.8M408.82 343.45L401.15 338.75M400.19 356.38L392.9 351.09M390.56 368.59L383.72 362.75"/>
+            </g>
+          </g>
+          <rect x="189" y="296" width="102" height="44" rx="5" fill="#06090B" stroke="#4A5861" stroke-width="1.25"/>
+          <path d="M223 299L223 337M257 299L257 337" stroke="#2B363D"/>
+          <g class="scale" fill="#F3F6F7">
+            <text x="133.93" y="346.07">0</text>
+            <text x="90" y="240">20</text>
+            <text x="133.93" y="133.93">40</text>
+            <text x="240" y="90">60</text>
+            <text x="346.07" y="133.93">80</text>
+            <text x="390" y="240">100</text>
+            <text x="346.07" y="346.07">120</text>
+            <text class="digit" x="206" y="319">0</text>
+            <text class="digit" x="240" y="319">6</text>
+            <text class="digit" x="274" y="319">2</text>
+          </g>
+          <g fill="#9FADB5">
+            <text x="240" y="366" font-size="11" letter-spacing="2.6">PAGE WEIGHT</text>
+            <text x="240" y="384" font-size="9" letter-spacing="2.2">KB COMPRESSED</text>
+          </g>
+          <g transform="translate(243 246)" opacity=".38">
+            <path class="needle" transform="rotate(4.5)" d="M0-190L3.6-4L6 46Q0 52-6 46L-3.6-4Z"/>
+          </g>
+          <g transform="translate(240 240)">
+            <path class="needle" transform="rotate(4.5)" fill="#F3F6F7" d="M0-190L3.6-4L6 46Q0 52-6 46L-3.6-4Z"/>
+            <circle r="15" fill="#0A0F12" stroke="#5B6972" stroke-width="1.5"/>
+            <circle r="3.5" fill="#F3F6F7"/>
+          </g>
+        </svg>
+        <figcaption>This page, <span class="live">live</span><noscript>measured November&nbsp;2026</noscript>: <strong><span id="visit-n">8</span>&nbsp;requests, <span id="visit-kb">62&nbsp;KB</span></strong>.<br>A typical page: <a href="https://httparchive.org/reports/page-weight">2,617&nbsp;KB</a>.</figcaption>
+      </figure>
     </section>
 
-    <section id="experience" class="section">
+    <section class="tally" aria-label="Selected work, in numbers">
+      <h2>Selected work</h2>
+      <a href="#work"><span class="fig"><span class="num">28</span> <span class="unit">KB</span></span> <span class="what">Flight instrument panel</span></a>
+      <a href="#work"><span class="fig"><span class="num">164</span> <span class="unit">tests</span></span> <span class="what">CDT ladder calculator</span></a>
+      <a href="#work"><span class="fig"><span class="num">0</span> <span class="unit">of 10 failed</span></span> <span class="what">AI ladder explainer</span></a>
+      <a href="#work"><span class="fig"><span class="num">0.887</span> <span class="unit">precision</span></span> <span class="what">AI data cleanup assistant</span></a>
+    </section>
+
+    <section class="manifesto">
+      <p class="say"><span class="w" style="--i:0">Lately</span> <span class="w" style="--i:1">I</span> <span class="w" style="--i:2">build</span> <span class="w" style="--i:3">AI</span> <span class="w" style="--i:4">features</span> <span class="w" style="--i:5">whose</span> <span class="w" style="--i:6">answers</span> <span class="w" style="--i:7">are</span> <span class="w" style="--i:8">checked</span> <span class="w" style="--i:9">by</span> <span class="w" style="--i:10">code</span> <span class="w" style="--i:11">before</span> <span class="w" style="--i:12">anyone</span> <span class="w" style="--i:13">reads</span> <span class="w" style="--i:14">them.</span> <span class="w" style="--i:15">The</span> <span class="w" style="--i:16">figures</span> <span class="w" style="--i:17">on</span> <span class="w" style="--i:18">this</span> <span class="w" style="--i:19">site</span> <span class="w" style="--i:20">name</span> <span class="w" style="--i:21">where</span> <span class="w" style="--i:22">they</span> <span class="w" style="--i:23">come</span> <span class="w" style="--i:24">from:</span> <span class="w" style="--i:25">a</span> <span class="w" style="--i:26">file,</span> <span class="w" style="--i:27">a</span> <span class="w" style="--i:28">test</span> <span class="w" style="--i:29">run</span> <span class="w" style="--i:30">or</span> <span class="w" style="--i:31">a</span> <span class="w" style="--i:32">commit.</span> <span class="w" style="--i:33">The</span> <span class="w" style="--i:34">ones</span> <span class="w" style="--i:35">that</span> <span class="w" style="--i:36">missed</span> <span class="w" style="--i:37">their</span> <span class="w" style="--i:38">target</span> <span class="w" style="--i:39">are</span> <span class="w" style="--i:40">published</span> <span class="w" style="--i:41">too.</span></p>
+    </section>
+
+    <section id="work" class="block">
+      <h2>Selected work</h2>
+      <div>
+        <ul class="rows" role="list">
+          <li class="row">
+            <p class="fig"><span class="num">28</span> <span class="unit">KB</span></p>
+            <div class="body">
+              <h3>Flight instrument panel</h3>
+              <p>A working flight instrument panel, drawn in Canvas 2D over a simulated flight. Vanilla JavaScript, no framework, no build step.</p>
+            </div>
+            <p class="links"><a href="https://estebancitox.github.io/lab-instrument/">Demo</a> <a href="https://github.com/estebancitox/lab-instrument">Source</a></p>
+          </li>
+          <li class="row">
+            <p class="fig"><span class="num">164</span> <span class="unit">tests</span></p>
+            <div class="body">
+              <h3>CDT ladder calculator</h3>
+              <p>A visual calculator for laddering Colombian term deposits. React 18 and TypeScript, unit-tested, deployed by CI.</p>
+            </div>
+            <p class="links"><a href="https://estebancitox.github.io/lab-cdt-ladder/">Demo</a> <a href="https://github.com/estebancitox/lab-cdt-ladder">Source</a></p>
+          </li>
+          <li class="row">
+            <p class="fig"><span class="num">0</span> <span class="unit">of 10 failed</span></p>
+            <div class="body">
+              <h3>AI ladder explainer</h3>
+              <p>An AI endpoint that explains each ladder in words. Code checks every number first, and a reply that fails is never shown.</p>
+            </div>
+            <p class="links"><a href="/notes/cdt-ladder-api.html">Case study</a></p>
+          </li>
+          <li class="row">
+            <p class="fig"><span class="num">0.887</span> <span class="unit">precision</span></p>
+            <div class="body">
+              <h3>AI data cleanup assistant</h3>
+              <p>Built in one day from an open brief, in Next.js 16 and TypeScript. The model proposes rules for a spreadsheet file, code checks each one against the data, and nothing changes until a person accepts it. The target was 0.90.</p>
+            </div>
+            <p class="links"><a href="https://github.com/estebancitox/ai-data-cleanup-assistant">Source</a></p>
+          </li>
+        </ul>
+        <p class="all"><a href="/lab/">All lab projects, with how each number was measured</a></p>
+      </div>
+    </section>
+
+    <section id="experience" class="block">
       <h2>Experience</h2>
-      <ol class="log" role="list" reversed>
-        <li class="entry">
-          <p class="entry-when"><time datetime="2023">2023</time>–<time datetime="2026">2026</time></p>
-          <div class="entry-body">
-            <h3 class="entry-role">Senior Frontend Engineer · PartsBase <span class="entry-tag">contract</span></h3>
-            <p class="entry-detail">PartsBase is a B2B marketplace for aviation parts. I looked after six production single-page apps, S3-hosted, with a running focus on performance, security remediation, and CI on Azure&nbsp;DevOps.</p>
+      <ol class="rows" role="list" reversed>
+        <li class="row">
+          <p class="when"><time datetime="2023">2023</time>–<time datetime="2026">2026</time></p>
+          <div class="body">
+            <h3><span>Senior Frontend Engineer</span> <span class="org">PartsBase, contract</span></h3>
+            <p>A B2B marketplace for aviation parts. Six production single-page apps, with a running focus on performance, security remediation and CI.</p>
           </div>
         </li>
-        <li class="entry">
-          <p class="entry-when"><time datetime="2022">2022</time>–<time datetime="2023">2023</time></p>
-          <div class="entry-body">
-            <h3 class="entry-role">Frontend Developer · Lifetiment</h3>
+        <li class="row">
+          <p class="when"><time datetime="2022">2022</time>–<time datetime="2023">2023</time></p>
+          <div class="body">
+            <h3><span>Frontend Developer</span> <span class="org">Lifetiment</span></h3>
           </div>
         </li>
-        <li class="entry">
-          <p class="entry-when"><time datetime="2019">2019</time>–<time datetime="2021">2021</time></p>
-          <div class="entry-body">
-            <h3 class="entry-role">Frontend Web Developer · Marketmov</h3>
+        <li class="row">
+          <p class="when"><time datetime="2019">2019</time>–<time datetime="2021">2021</time></p>
+          <div class="body">
+            <h3><span>Frontend Web Developer</span> <span class="org">Marketmov</span></h3>
           </div>
         </li>
-        <li class="entry">
-          <p class="entry-when"><time datetime="2018">2018</time></p>
-          <div class="entry-body">
-            <h3 class="entry-role">Freelance &amp; personal projects</h3>
-            <p class="entry-detail">Where the 8+ years start counting.</p>
+        <li class="row">
+          <p class="when"><time datetime="2018">2018</time></p>
+          <div class="body">
+            <h3>Freelance and personal projects</h3>
+            <p>Where the 8+ years start counting.</p>
           </div>
         </li>
       </ol>
     </section>
 
-    <section id="work" class="section">
-      <h2>Selected work</h2>
-      <ul class="log" role="list">
-        <li class="entry">
-          <h3 class="entry-key">lab / instrument</h3>
-          <div class="entry-body">
-            <p class="entry-detail">A working flight instrument panel: Canvas&nbsp;2D over a simulated flight. Vanilla&nbsp;JS, no frameworks, no build step.</p>
-            <p class="entry-links"><a href="https://estebancitox.github.io/lab-instrument/">demo&nbsp;<span aria-hidden="true">↗</span></a> <a href="https://github.com/estebancitox/lab-instrument">source&nbsp;<span aria-hidden="true">↗</span></a></p>
-          </div>
-        </li>
-        <li class="entry">
-          <h3 class="entry-key">lab / cdt-ladder</h3>
-          <div class="entry-body">
-            <p class="entry-detail">A visual calculator for CDT laddering (Colombian term deposits): React&nbsp;18 + TypeScript, unit-tested, deployed by&nbsp;CI, with an explanation on demand from a verified LLM endpoint.</p>
-            <p class="entry-links"><a href="https://estebancitox.github.io/lab-cdt-ladder/">demo&nbsp;<span aria-hidden="true">↗</span></a> <a href="https://github.com/estebancitox/lab-cdt-ladder">source&nbsp;<span aria-hidden="true">↗</span></a> <a href="/notes/cdt-ladder-api.html">case&nbsp;study</a></p>
-          </div>
-        </li>
-        <li class="entry">
-          <h3 class="entry-key">ai data cleanup assistant</h3>
-          <div class="entry-body">
-            <p class="entry-detail">Built in one day from an open brief, in Next.js&nbsp;16 + TypeScript. The model proposes rules about a CSV file, code checks each one against the data, and nothing changes until a person accepts it. Held-out dataset, scored once: 86 of 99 planted errors found, 11 false positives.</p>
-            <p class="entry-links"><a href="https://github.com/estebancitox/ai-data-cleanup-assistant">source&nbsp;<span aria-hidden="true">↗</span></a></p>
-          </div>
-        </li>
-        <li class="entry">
-          <h3 class="entry-key">building this site</h3>
-          <div class="entry-body">
-            <p class="entry-detail">The case study behind this page: every claim anchored to the repo or its git history.</p>
-            <p class="entry-links"><a href="/notes/building-this-site.html">read</a></p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section id="capabilities" class="section">
-      <h2>Capabilities</h2>
-      <dl class="caps">
-        <div class="cap">
-          <dt>Core</dt>
-          <dd>JavaScript · TypeScript · React · Next.js · Redux</dd>
+    <section id="capabilities" class="block">
+      <h2>Skills</h2>
+      <dl class="rows">
+        <div class="row">
+          <dt>Frontend</dt>
+          <dd>JavaScript, TypeScript, React, Next.js, Redux</dd>
         </div>
-        <div class="cap">
-          <dt>Platform</dt>
-          <dd>Node.js · Firebase · PostgreSQL · unit testing · AWS&nbsp;(fundamentals)</dd>
+        <div class="row">
+          <dt>Backend and tools</dt>
+          <dd>Node.js, Firebase, PostgreSQL, unit testing, AWS fundamentals</dd>
         </div>
-        <div class="cap">
-          <dt>Practice</dt>
+        <div class="row">
+          <dt>How I work</dt>
           <dd>Business administration before engineering, so technical decisions get weighed in commercial terms. AI-assisted workflows are part of daily practice, held to a strict verification bar: generated code is reviewed, tested, and owned like anything else that ships.</dd>
         </div>
       </dl>
     </section>
 
-    <section id="contact" class="section">
+    <section id="contact" class="block">
       <h2>Contact</h2>
-      <div class="contact-body">
-        <p class="contact-lead">Building something that needs a senior frontend hand?</p>
-        <p class="contact-mail"><a href="mailto:sergio.smiling@gmail.com">sergio.smiling@gmail.com</a></p>
-        <ul class="links" role="list">
-          <li><a href="https://www.linkedin.com/in/sergioestebantorres">linkedin&nbsp;<span aria-hidden="true">↗</span></a></li>
-        </ul>
-        <p class="dataline">Spanish&nbsp;(native)&nbsp;· English&nbsp;(professional)</p>
+      <div class="reach">
+        <p class="ask">Building something that needs a senior frontend hand?</p>
+        <p class="mail"><a href="mailto:sergio.smiling@gmail.com">sergio.smiling@gmail.com</a></p>
+        <div class="cta">
+          <a class="btn" href="mailto:sergio.smiling@gmail.com">Email me</a>
+          <a class="link" href="https://www.linkedin.com/in/sergioestebantorres">LinkedIn</a>
+        </div>
+        <p class="langs">Spanish, native. English, professional. Colombia, UTC−05.</p>
       </div>
     </section>
   </main>
 
+  <nav id="menu" aria-label="Menu">
+    <ul role="list">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#capabilities">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <footer class="colophon">
     <p class="label">Colophon</p>
-    <p><a href="/notes/building-this-site.html">Hand-built</a>: semantic HTML, modern CSS, and ≈1.2&nbsp;KB (gzipped) of vanilla JavaScript. No framework, no build step, no tracking.</p>
-    <p id="scores">Lighthouse (mobile): 100&nbsp;·&nbsp;100&nbsp;·&nbsp;100&nbsp;·&nbsp;100 (performance, accessibility, best&nbsp;practices, SEO). Scores measured July&nbsp;2026 · ≈50&nbsp;KB compressed, webfonts included, measured November&nbsp;2026.</p>
-    <p id="visit" hidden>This visit: <span id="visit-n">—</span>&nbsp;requests · <span id="visit-kb">—</span> compressed.</p>
-    <p>© 2026 Sergio Esteban Torres · Set in Archivo &amp; IBM&nbsp;Plex&nbsp;Mono · <a href="https://github.com/estebancitox/estebancitox.github.io">source&nbsp;<span aria-hidden="true">↗</span></a></p>
+    <p>Hand-built: semantic HTML, modern CSS and about 2&nbsp;KB of JavaScript. No framework, no build step, no tracking. Lighthouse on mobile: 100, 100, 100, 100, measured November&nbsp;2026.</p>
+    <p class="src"><a href="https://github.com/estebancitox/estebancitox.github.io">Source</a></p>
   </footer>
 </body>
 </html>

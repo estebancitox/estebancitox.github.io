@@ -1,0 +1,813 @@
+/* ── Faces ─────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Newsreader";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/newsreader-opsz-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Archivo";
+  font-weight: 400 650;
+  font-display: swap;
+  src: url("/fonts/archivo-wght.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Archivo Name";
+  font-weight: 650;
+  font-display: swap;
+  src: url("/fonts/archivo-name-650.woff2") format("woff2");
+}
+@font-face {
+  font-family: "B612";
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/b612-700.woff2") format("woff2");
+}
+
+/* Metric-matched fallbacks: text lays out on webfont metrics before swap.
+   size-adjust is tuned in Chrome so the first screen breaks into the same
+   lines with either face, from 320 px up; the overrides follow from it. */
+@font-face {
+  font-family: "Newsreader-fb";
+  src: local("Georgia");
+  size-adjust: 94.6%;
+  ascent-override: 77.70%;
+  descent-override: 28.01%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo-fb";
+  font-weight: 400 500;
+  src: local("Arial");
+  size-adjust: 99.3%;
+  ascent-override: 88.42%;
+  descent-override: 21.15%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo-fb";
+  font-weight: 550 650;
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  size-adjust: 95.25%;
+  ascent-override: 92.18%;
+  descent-override: 22.05%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "ArchivoName-fb";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  size-adjust: 110.86%;
+  ascent-override: 79.2%;
+  descent-override: 18.94%;
+  line-gap-override: 0%;
+}
+
+@layer reset, base, layout, components, motion, print;
+
+/* ── Reset ─────────────────────────────────────────────── */
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  ol[role],
+  ul[role] {
+    padding: 0;
+    list-style: none;
+  }
+  svg {
+    display: block;
+  }
+}
+
+/* ── Tokens ────────────────────────────────────────────── */
+
+:root {
+  color-scheme: light;
+  --ground: #e9edee;
+  --ink: #0e1920;
+  --muted: #47555e;
+  --line: #c3cdd2;
+  --signal: #17a65b; /* the lamp only, never text */
+  --say-from: #76838a;
+  --say-wave: #0f8a4a;
+
+  --serif: "Newsreader", "Newsreader-fb", Georgia, serif;
+  --sans: "Archivo", "Archivo-fb", Arial, sans-serif;
+  --wide: "Archivo Name", "ArchivoName-fb", Arial, sans-serif;
+  --dial: "B612", Arial, sans-serif;
+
+  --pad: max(clamp(1.25rem, 5.6vw, 4.5rem), calc((100% - 71rem) / 2));
+  --ticks: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--muted) 55%, transparent) 0 1px,
+    transparent 1px 10.5px
+  );
+}
+
+/* The ruler marker's travel, 0 at the top of the page and 1 at the end.
+   Registered so the scroll timeline can interpolate it. */
+@property --travel {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    font: 400 1rem/1.5 var(--sans);
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    background: var(--ground);
+    color: var(--ink);
+  }
+  ::selection {
+    background: var(--ink);
+    color: var(--ground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--muted);
+  }
+  h1 {
+    font: 650 1rem/1.375rem var(--wide);
+    letter-spacing: -0.005em;
+  }
+  h2 {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 1.0625rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+  }
+  .lead,
+  .say,
+  .ask,
+  .num {
+    font-family: var(--serif);
+    letter-spacing: -0.02em;
+  }
+  .skip {
+    position: absolute;
+    left: -100vw;
+    top: 0;
+  }
+  .skip:focus {
+    left: 0;
+    z-index: 10;
+    padding: 0.75rem 1.25rem;
+    background: var(--ink);
+    color: var(--ground);
+  }
+}
+
+/* ── Layout ────────────────────────────────────────────── */
+
+@layer layout {
+  .head {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    min-height: 4rem;
+    padding: 0.625rem var(--pad);
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+  }
+  .id {
+    display: flex;
+    align-items: baseline;
+    column-gap: 0.875rem;
+    margin-right: 2.5rem;
+    white-space: nowrap;
+  }
+  .title {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    color: var(--muted);
+  }
+  .tape {
+    margin-left: auto;
+  }
+  .avail {
+    margin-left: 2.75rem;
+  }
+  .menu,
+  #menu {
+    display: none;
+  }
+
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem 4rem;
+    padding: 3.25rem var(--pad) 0;
+  }
+  .pitch {
+    flex: 999 1 30rem;
+    min-width: 0;
+  }
+  .lead {
+    max-width: 38.75rem;
+    font-size: clamp(2.375rem, 4.5vw, 3.625rem);
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+  .years,
+  .where,
+  .mail {
+    max-width: 40rem;
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
+  }
+  .years {
+    margin-top: 1.5rem;
+  }
+  .where {
+    margin-top: 2px;
+    color: var(--muted);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .gauge {
+    flex: 1 1 20rem;
+    max-width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5625rem;
+  }
+
+  .tally {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 1.75rem;
+    margin: 2.75rem var(--pad) 0;
+    padding-top: 1.125rem;
+    border-top: 1px solid var(--line);
+  }
+  .tally h2 {
+    flex: 0 0 8.25rem;
+    padding-top: 0.75rem;
+  }
+  .tally a {
+    flex: 1 1 9.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .manifesto {
+    padding: clamp(5.5rem, 14vw, 10.5rem) var(--pad) clamp(5rem, 12vw, 9.25rem);
+  }
+  .say {
+    max-width: 58.75rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.16;
+    text-wrap: pretty;
+  }
+
+  .block {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.75rem;
+    margin: 6rem var(--pad) 0;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 6rem;
+  }
+  #work {
+    margin-top: 0;
+  }
+  .block h2 {
+    flex: 0 0 8.25rem;
+    padding-bottom: 0.75rem;
+  }
+  .block h2::before {
+    content: "";
+    display: block;
+    width: 1.75rem;
+    height: 2px;
+    margin: -1.5px 0 0.625rem;
+    background: var(--ink);
+  }
+  .block > :last-child {
+    flex: 999 1 35rem;
+    min-width: 0;
+  }
+  .rows {
+    margin-top: -1px;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1.75rem;
+    padding: 1rem 0 1.125rem;
+    border-top: 1px solid var(--line);
+  }
+  #work .row {
+    row-gap: 0.5rem;
+    padding: 1.375rem 0 1.5rem;
+  }
+  .row > :first-child {
+    flex: 0 0 11.875rem;
+  }
+  .body,
+  dd {
+    flex: 999 1 21.25rem;
+    min-width: 0;
+  }
+  .links {
+    flex: 0 0 9.375rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.25rem 1rem;
+  }
+  .all {
+    padding-top: 1.125rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .reach {
+    padding-top: 1.625rem;
+  }
+  .ask {
+    max-width: 45rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  .mail {
+    margin-top: 1.25rem;
+  }
+  .reach .cta {
+    margin-top: 1.5rem;
+  }
+  .langs {
+    margin-top: 1.375rem;
+  }
+
+  .colophon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem 1.75rem;
+    margin: 7rem var(--pad) 0;
+    padding: 1.25rem 0 2.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.84375rem;
+    line-height: 1.25rem;
+    color: var(--muted);
+  }
+  .label {
+    flex: 0 0 8.25rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .label + p {
+    flex: 999 1 26.25rem;
+    min-width: 0;
+    max-width: 40rem;
+  }
+  .src {
+    margin-left: auto;
+  }
+
+  /* Compact header: the ruler gives way to a Menu link, as in the 360 reference */
+  @media (max-width: 68.74em) {
+    .head {
+      position: static;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      min-height: 0;
+      padding-block: 0;
+      border-bottom: 0;
+    }
+    .head::after {
+      content: "";
+      grid-area: 2 / 1 / auto / -1;
+      height: 8px;
+      margin-inline: calc(var(--pad) * -1);
+      padding-inline: var(--pad);
+      border-top: 1px solid var(--line);
+      background: var(--ticks) content-box;
+    }
+    .id {
+      display: block;
+      margin: 0;
+      padding-block: 9.5px;
+    }
+    .title {
+      font-size: 1rem;
+    }
+    h1,
+    .title {
+      line-height: 1.25rem;
+    }
+    .tape {
+      display: none;
+    }
+    .menu {
+      display: block;
+      grid-area: 1 / 2;
+      padding: 0.75rem 0 0.75rem 0.75rem;
+      font-size: 0.9375rem;
+      line-height: 1.25rem;
+      font-weight: 550;
+    }
+    .avail {
+      grid-area: 3 / 1 / auto / -1;
+      margin: 1.375rem 0 0;
+    }
+
+    .hero {
+      row-gap: 2.75rem;
+      padding-top: 1.125rem;
+    }
+    .lead {
+      line-height: 1.053;
+    }
+    .years,
+    .where {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    .years {
+      margin-top: 1.125rem;
+    }
+    .hero .cta {
+      gap: 0.625rem;
+      margin-top: 1.375rem;
+    }
+    .block,
+    #menu {
+      scroll-margin-top: 1.5rem;
+    }
+    #menu {
+      display: block;
+      margin: 6rem var(--pad) 0;
+      border-top: 1px solid var(--line);
+    }
+  }
+  @media (max-width: 63.99em) {
+    .links {
+      justify-content: flex-start;
+    }
+  }
+  /* Where the four figures no longer fit one row: the label on its own line,
+     then two figures a row, then one */
+  @media (max-width: 59.99em) {
+    .tally h2 {
+      flex-basis: 100%;
+      padding-top: 0;
+    }
+    .tally a {
+      flex-basis: 40%;
+    }
+  }
+  @media (max-width: 29.99em) {
+    .tally a {
+      flex-basis: 100%;
+    }
+  }
+}
+
+/* ── Components ────────────────────────────────────────── */
+
+@layer components {
+  /* The ruler: one mark per section, placed where the marker will be when that
+     section is at the top. js/site.js moves the marks to the live layout. */
+  .tape {
+    position: relative;
+    flex: 0 1 26.25rem;
+    min-width: 18.75rem;
+    height: 2.25rem;
+    container-type: inline-size;
+  }
+  .tape::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 7px;
+    background: var(--ticks);
+  }
+  .tape::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--ground) 60%, transparent);
+    translate: calc(var(--travel) * (100cqi - 15px));
+  }
+  .tape li {
+    position: absolute;
+    inset: 0 auto 0 0;
+    translate: calc(7.5px + var(--p) * (100cqi - 15px));
+  }
+  .tape li::after {
+    content: "";
+    position: absolute;
+    left: -0.75px;
+    bottom: 0;
+    width: 1.5px;
+    height: 12px;
+    background: var(--ink);
+  }
+  .tape a {
+    position: absolute;
+    translate: calc(-50% + var(--dx, 0px));
+    font-size: 0.8125rem;
+    line-height: 1rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .tape a:hover {
+    color: var(--ink);
+  }
+  /* Without JavaScript: the positions js/site.js computes at 1280 × 720 */
+  .tape li:nth-child(1) {
+    --p: 0.4489;
+  }
+  .tape li:nth-child(2) {
+    --p: 0.7376;
+  }
+  .tape li:nth-child(3) {
+    --p: 0.9058;
+    --dx: -8.4px;
+  }
+  .tape li:nth-child(4) {
+    --p: 1;
+  }
+
+  .avail {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .avail::before {
+    content: "";
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal) 16%, transparent);
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding: 0 1.375rem;
+    border-radius: 3px;
+    background: var(--ink);
+    font-weight: 550;
+  }
+  .btn,
+  .btn:hover {
+    color: var(--ground);
+  }
+  .link {
+    margin-left: 0.875rem;
+    padding: 0.75rem 0;
+    font-weight: 550;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+  }
+  .links a,
+  .all a,
+  .mail a,
+  .src a,
+  figcaption a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  .links,
+  .all {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 550;
+  }
+
+  .gauge svg {
+    width: 100%;
+    max-width: 23.25rem;
+    height: auto;
+    filter: drop-shadow(0 28px 36px color-mix(in srgb, var(--ink) 26%, transparent))
+      drop-shadow(0 4px 8px color-mix(in srgb, var(--ink) 18%, transparent));
+  }
+  .gauge text {
+    font-family: var(--dial);
+    font-weight: 700;
+    text-anchor: middle;
+  }
+  .scale text {
+    font-size: 27px;
+    dominant-baseline: central;
+  }
+  figcaption {
+    font-size: 0.84375rem;
+    line-height: 1.25rem;
+    text-align: center;
+    color: var(--muted);
+  }
+  figcaption strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  /* "live" is claimed only where scripts run; the noscript beside it says
+     when the static reading was taken */
+  html:not(.js) .live {
+    display: none;
+  }
+
+  .fig {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .num {
+    font-size: 2.125rem;
+    line-height: 2.375rem;
+  }
+  .row .num {
+    font-size: 2.5rem;
+    line-height: 2.75rem;
+  }
+  .unit {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .what {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+
+  .when,
+  dt,
+  .body p,
+  .langs {
+    font-size: 0.96875rem;
+    line-height: 1.5rem;
+    color: var(--muted);
+  }
+  .when {
+    font-variant-numeric: tabular-nums;
+  }
+  .body h3 {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.75rem;
+  }
+  .org {
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .body p {
+    margin-top: 0.25rem;
+  }
+  .body p,
+  dd {
+    max-width: 35rem;
+    text-wrap: pretty;
+  }
+  dd {
+    line-height: 1.5625rem;
+  }
+
+  #menu a {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--line);
+    font-weight: 550;
+  }
+
+  @media (max-width: 68.74em) {
+    .avail {
+      gap: 9px;
+      font-size: 1rem;
+      line-height: 1.25rem;
+    }
+    .hero .btn {
+      padding-inline: 1.125rem;
+    }
+    .hero .link {
+      margin-left: 0.625rem;
+    }
+    .gauge svg {
+      max-width: 18.75rem;
+      filter: drop-shadow(0 22px 30px color-mix(in srgb, var(--ink) 26%, transparent))
+        drop-shadow(0 4px 8px color-mix(in srgb, var(--ink) 18%, transparent));
+    }
+  }
+}
+
+/* ── Motion ────────────────────────────────────────────── */
+
+@layer motion {
+  @keyframes sweep {
+    from {
+      transform: rotate(-135deg);
+    }
+  }
+  @keyframes travel {
+    to {
+      --travel: 1;
+    }
+  }
+  @keyframes ink {
+    0% {
+      color: var(--say-from);
+    }
+    45% {
+      color: var(--say-wave);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .needle {
+      animation: sweep 1.5s cubic-bezier(0.22, 0.9, 0.24, 1) 0.25s both;
+    }
+    /* js/site.js: the visit's reading differs from the static one */
+    .needle.live {
+      animation: none;
+      transition: transform 0.9s cubic-bezier(0.22, 0.9, 0.24, 1);
+    }
+    /* Driven by scroll position; the scroll itself is never moved or slowed */
+    @supports (animation-timeline: view()) {
+      .tape::after {
+        animation: travel linear both;
+        animation-timeline: scroll(root);
+      }
+      .say {
+        view-timeline-name: --say;
+      }
+      .w {
+        animation: ink linear both;
+        animation-timeline: --say;
+        animation-range: cover calc(18% + var(--i) * 0.81%) cover calc(27% + var(--i) * 0.81%);
+      }
+    }
+  }
+}
+
+/* ── Print ─────────────────────────────────────────────── */
+
+@layer print {
+  @media print {
+    .head {
+      position: static;
+    }
+    .tape,
+    .menu,
+    #menu,
+    .skip {
+      display: none;
+    }
+    .gauge svg {
+      filter: none;
+    }
+  }
+}
