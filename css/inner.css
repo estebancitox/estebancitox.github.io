@@ -5,7 +5,7 @@
 /* ── Faces ─────────────────────────────────────────────── */
 
 /* Code needs a monospace; the home page has none. This file is already in
-   fonts/ and its fallback metrics are the ones css/main.css uses. */
+   fonts/ and its fallback metrics are the ones the previous design used. */
 @font-face {
   font-family: "IBM Plex Mono";
   font-weight: 400;

@@ -1,7 +1,7 @@
 /* The visit line in the colophon of the lab and the two notes: the requests
    this visit made and the compressed bytes that crossed the network. Taken
-   from paintVisit in js/main.js. The home page shows the same reading on its
-   gauge, from js/site.js. */
+   from paintVisit in the previous design's script. The home page shows the
+   same reading on its gauge, from js/site.js. */
 (() => {
   "use strict";
 
